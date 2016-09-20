@@ -1,0 +1,16 @@
+{
+    "name": "cupoftea/fluent",
+    "description": "Fluent Container",
+    "require": {
+        "cupoftea/package": "^1.2",
+        "illuminate/contracts": "^5.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sven Wittevrongel",
+            "email": "cupoftea696@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
