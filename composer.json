@@ -1,16 +1,21 @@
 {
     "name": "cupoftea/fluent",
     "description": "Fluent Container",
-    "require": {
-        "cupoftea/package": "^1.2",
-        "illuminate/contracts": "^5.3"
-    },
-    "license": "MIT",
     "authors": [
         {
             "name": "Sven Wittevrongel",
             "email": "cupoftea696@gmail.com"
         }
     ],
-    "minimum-stability": "stable"
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "cupoftea/package": "^1.2",
+        "illuminate/contracts": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "CupOfTea\\Support\\": "src/"
+        }
+    }
 }
