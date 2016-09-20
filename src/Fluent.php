@@ -1,5 +1,4 @@
 <?php
-
 namespace CupOfTea\Support;
 
 use ArrayAccess;
@@ -46,17 +45,18 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
     
     /**
      * Create a new Fluent Container instance.
-     * 
+     *
      * @param  array|object  $attributes
      * @return void
      */
-    public static function create($attributes = []) {
+    public static function create($attributes = [])
+    {
         return new self($attributes);
     }
     
     /**
      * Fill the container with the given Attributes.
-     * 
+     *
      * @param  array|object  $attributes
      * @return void
      */
@@ -173,7 +173,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
     
     /**
      * Handle dynamic calls of the container to get attribute.
-     * 
+     *
      * @param  string  $attribute
      * @return mixed
      */
