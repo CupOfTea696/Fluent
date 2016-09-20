@@ -73,7 +73,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
      * Get an attribute from the container.
      *
      * @param  string  $key
-     * @param  mixed   $default
+     * @param  mixed  $default
      * @return mixed
      */
     public function get($key, $default = null)
@@ -82,7 +82,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
             return $this->attributes[$key];
         }
         
-        return value($default);
+        return $this->value($default);
     }
     
     /**
@@ -152,7 +152,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
      * Set the value at the given offset.
      *
      * @param  string  $offset
-     * @param  mixed   $value
+     * @param  mixed  $value
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -186,7 +186,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
      * Handle dynamic calls to the container to set attributes.
      *
      * @param  string  $method
-     * @param  array   $parameters
+     * @param  array  $parameters
      * @return $this
      */
     public function __call($method, $parameters)
@@ -199,7 +199,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
     /**
      * Dynamically retrieve the value of an attribute.
      *
-     * @param  string $key
+     * @param  string  $key
      * @return mixed
      */
     public function __get($key)
@@ -239,5 +239,16 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
     public function __unset($key)
     {
         unset($this->attributes[$key]);
+    }
+    
+    /**
+     * Return the default value of the given value.
+     *
+     * @param  mixed  $value
+     * @return mixed
+     */
+    protected function value($value)
+    {
+        return $value instanceof Closure ? $value() : $value;
     }
 }
