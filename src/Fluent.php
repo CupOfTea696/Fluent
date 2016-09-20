@@ -4,11 +4,28 @@ namespace CupOfTea\Support;
 
 use ArrayAccess;
 use JsonSerializable;
+use CupOfTea\Package\Package;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
 {
+    use Package;
+    
+    /**
+     * Package Name.
+     *
+     * @const string
+     */
+    const PACKAGE = 'CupOfTea/Fluent';
+    
+    /**
+     * Package Version.
+     *
+     * @const string
+     */
+    const VERSION = '0.0.0';
+    
     /**
      * All of the attributes set on the container.
      *
