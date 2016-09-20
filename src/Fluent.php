@@ -24,7 +24,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
      *
      * @const string
      */
-    const VERSION = '0.0.0';
+    const VERSION = '1.0.0';
     
     /**
      * All of the attributes set on the container.
