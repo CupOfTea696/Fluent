@@ -1,13 +1,13 @@
 <?php
+
 namespace CupOfTea\Support;
 
-use ArrayAccess;
-use JsonSerializable;
+use Illuminate\Support\Arr;
 use CupOfTea\Package\Package;
-use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Fluent as IlluminateFluent;
+use CupOfTea\Support\Contracts\Fluent as FluentContract;
 
-class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
+class Fluent extends IlluminateFluent implements FluentContract
 {
     use Package;
     
@@ -44,10 +44,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
     }
     
     /**
-     * Create a new Fluent Container instance.
-     *
-     * @param  array|object  $attributes
-     * @return void
+     * {@inheritDoc}
      */
     public static function create($attributes = [])
     {
@@ -55,10 +52,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
     }
     
     /**
-     * Fill the container with the given Attributes.
-     *
-     * @param  array|object  $attributes
-     * @return void
+     * {@inheritDoc}
      */
     public function fill($attributes = [])
     {
@@ -67,32 +61,88 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
         foreach ($attributes as $key => $value) {
             $this->attributes[$key] = $value;
         }
+        
+        return $this;
     }
     
     /**
-     * Get an attribute from the container.
-     *
-     * @param  string  $key
-     * @param  mixed  $default
-     * @return mixed
+     * {@inheritDoc}
      */
-    public function get($key, $default = null)
+    public function has($key, $dotNotation = true)
     {
+        if ($dotNotation) {
+            return Arr::has($this->attributes, $key);
+        }
+        
+        return Arr::exists($this->attributes, $key);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function get($key, $default = null, $dotNotation = true)
+    {
+        if ($dotNotation) {
+            return Arr::get($this->attributes, $key, $default);
+        }
+        
         if (array_key_exists($key, $this->attributes)) {
             return $this->attributes[$key];
         }
         
-        return $this->value($default);
+        return value($default);
     }
     
     /**
-     * Get the attributes from the container.
-     *
-     * @return array
+     * {@inheritDoc}
+     */
+    public function set($key, $value = true, $dotNotation = true)
+    {
+        if ($dotNotation) {
+            Arr::set($this->attributes, $key, $value);
+        } else {
+            $this->attributes[$key] = $value;
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function remove($keys, $dotNotation = true)
+    {
+        if ($dotNotation) {
+            Arr::forget($this->attributes, $keys);
+            
+            return;
+        }
+        
+        $keys = (array) $keys;
+        
+        if (count($keys) === 0) {
+            return;
+        }
+        
+        foreach ($keys as $key) {
+            unset($this->attributes[$key]);
+        }
+    }
+    
+    /**
+     * {@inheritDoc}
      */
     public function getAttributes()
     {
         return $this->attributes;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function setAttributes($attributes = [])
+    {
+        return $this->fill($attributes);
     }
     
     /**
@@ -189,11 +239,12 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
      * @param  array  $parameters
      * @return $this
      */
-    public function __call($method, $parameters)
+    public function __call($key, $args)
     {
-        $this->attributes[$method] = count($parameters) > 0 ? $parameters[0] : true;
+        $value = count($args) > 0 ? $args[0] : true;
+        $dotNotation = count($args) > 1 ? $args[1] : true;
         
-        return $this;
+        return $this->set($key, $value, $dotNotation);
     }
     
     /**
@@ -216,7 +267,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
      */
     public function __set($key, $value)
     {
-        $this->attributes[$key] = $value;
+        $this->set($key, $value);
     }
     
     /**
@@ -227,7 +278,7 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
      */
     public function __isset($key)
     {
-        return isset($this->attributes[$key]);
+        return $this->has($key);
     }
     
     /**
@@ -238,17 +289,6 @@ class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
      */
     public function __unset($key)
     {
-        unset($this->attributes[$key]);
-    }
-    
-    /**
-     * Return the default value of the given value.
-     *
-     * @param  mixed  $value
-     * @return mixed
-     */
-    protected function value($value)
-    {
-        return $value instanceof Closure ? $value() : $value;
+        $this->remove($key);
     }
 }

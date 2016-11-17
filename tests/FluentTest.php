@@ -51,6 +51,31 @@ class SupportFluentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Default', $fluent->get('foo', 'Default'));
         $this->assertEquals('Sven', $fluent->name);
         $this->assertNull($fluent->foo);
+        
+        $fluent = new Fluent(['profile' => ['name' => 'Sven']]);
+        
+        $this->assertEquals('Sven', $fluent->get('profile.name'));
+        $this->assertNull($fluent->get('profile.name', null, false));
+    }
+    
+    public function testSetMethodSetsAttribute()
+    {
+        $fluent = new Fluent();
+        
+        $fluent->set('name', 'Sven');
+        $fluent->age = 23;
+        
+        $this->assertEquals('Sven', $fluent->get('name'));
+        $this->assertEquals(23, $fluent->age);
+        
+        $fluent = new Fluent();
+        
+        $fluent->set('profile.age', 23);
+        $fluent->set('profile.developer', true, false);
+        
+        $this->assertEquals(23, $fluent->profile['age']);
+        $this->assertTrue($fluent->get('profile.developer'));
+        $this->assertTrue($fluent->get('profile.developer', false));
     }
     
     public function testMagicMethodCanBeUsedToGetAttributes()
@@ -68,26 +93,38 @@ class SupportFluentTest extends PHPUnit_Framework_TestCase
     {
         $fluent = new Fluent;
         
-        $fluent->name = 'Sven';
+        $fluent->name('Sven');
         $fluent->developer();
         $fluent->age(23);
         
         $this->assertEquals('Sven', $fluent->name);
         $this->assertTrue($fluent->developer);
         $this->assertEquals(23, $fluent->age);
-        $this->assertInstanceOf('CupOfTea\Support\Fluent', $fluent->programmer());
+        $this->assertInstanceOf(Fluent::class, $fluent->programmer());
     }
     
-    public function testIssetMagicMethod()
+    public function testIssetUnset()
     {
-        $array = ['name' => 'Sven', 'age' => 23];
-        $fluent = new Fluent($array);
+        $fluent = new Fluent(['name' => 'Sven']);
         
+        $this->assertTrue($fluent->has('name'));
         $this->assertTrue(isset($fluent->name));
         
         unset($fluent->name);
         
+        $this->assertFalse($fluent->has('name'));
         $this->assertFalse(isset($fluent->name));
+        
+        $fluent = new Fluent(['profile' => ['name' => 'Sven']]);
+        
+        $this->assertTrue($fluent->has('profile.name'));
+        $this->assertFalse($fluent->has('profile.name', false));
+        
+        $fluent->remove('profile.name', false);
+        $this->assertTrue($fluent->has('profile.name'));
+        
+        $fluent->remove('profile.name');
+        $this->assertFalse($fluent->has('profile.name'));
     }
     
     public function testToArrayReturnsAttribute()
@@ -100,8 +137,12 @@ class SupportFluentTest extends PHPUnit_Framework_TestCase
     
     public function testToJsonEncodesTheToArrayResult()
     {
-        $fluent = $this->getMock('CupOfTea\Support\Fluent', ['toArray']);
-        $fluent->expects($this->once())->method('toArray')->will($this->returnValue('foo'));
+        $fluent = $this->getMockBuilder(Fluent::class)
+            ->setMethods(['toArray'])
+            ->getMock();
+        $fluent->expects($this->once())
+            ->method('toArray')
+            ->will($this->returnValue('foo'));
         $results = $fluent->toJson();
         
         $this->assertJsonStringEqualsJsonString(json_encode('foo'), $results);
