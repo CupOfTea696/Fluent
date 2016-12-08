@@ -1,5 +1,4 @@
 <?php
-
 namespace CupOfTea\Support\Contracts;
 
 use ArrayAccess;
@@ -27,7 +26,7 @@ interface Fluent extends ArrayAccess, Arrayable, Jsonable, JsonSerializable
     
     /**
      * Check if an item or items exist in the array.
-     * 
+     *
      * @param  string|array $key
      * @param  bool  $dotNotation
      * @return bool
@@ -55,7 +54,7 @@ interface Fluent extends ArrayAccess, Arrayable, Jsonable, JsonSerializable
     
     /**
      * Remove one or many items from the container.
-     * 
+     *
      * @param  array|string  $keys
      * @param  bool  $dotNotation
      * @return void

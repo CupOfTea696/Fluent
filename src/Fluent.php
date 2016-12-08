@@ -1,5 +1,4 @@
 <?php
-
 namespace CupOfTea\Support;
 
 use Illuminate\Support\Arr;
@@ -44,7 +43,7 @@ class Fluent extends IlluminateFluent implements FluentContract
     }
     
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function create($attributes = [])
     {
@@ -52,7 +51,7 @@ class Fluent extends IlluminateFluent implements FluentContract
     }
     
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function fill($attributes = [])
     {
@@ -66,7 +65,7 @@ class Fluent extends IlluminateFluent implements FluentContract
     }
     
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function has($key, $dotNotation = true)
     {
@@ -78,7 +77,7 @@ class Fluent extends IlluminateFluent implements FluentContract
     }
     
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function get($key, $default = null, $dotNotation = true)
     {
@@ -94,7 +93,7 @@ class Fluent extends IlluminateFluent implements FluentContract
     }
     
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function set($key, $value = true, $dotNotation = true)
     {
@@ -108,7 +107,7 @@ class Fluent extends IlluminateFluent implements FluentContract
     }
     
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function remove($keys, $dotNotation = true)
     {
@@ -130,7 +129,7 @@ class Fluent extends IlluminateFluent implements FluentContract
     }
     
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getAttributes()
     {
@@ -138,7 +137,7 @@ class Fluent extends IlluminateFluent implements FluentContract
     }
     
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setAttributes($attributes = [])
     {
