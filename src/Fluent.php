@@ -290,4 +290,14 @@ class Fluent extends IlluminateFluent implements FluentContract
     {
         $this->remove($key);
     }
+    
+    /**
+     * Data shown in var_dump.
+     * 
+     * @return array
+     */
+    public function __debugInfo()
+    {
+        return $this->toArray();
+    }
 }
