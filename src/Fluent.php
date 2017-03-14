@@ -22,7 +22,7 @@ class Fluent extends IlluminateFluent implements FluentContract
      *
      * @const string
      */
-    const VERSION = '1.1.0';
+    const VERSION = '1.1.1';
     
     /**
      * All of the attributes set on the container.
