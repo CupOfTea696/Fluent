@@ -292,6 +292,16 @@ class Fluent extends IlluminateFluent implements FluentContract
     }
     
     /**
+     * Return the properties that should be serialized.
+     * 
+     * @return array
+     */
+    public function __sleep()
+    {
+        return ['attributes'];
+    }
+    
+    /**
      * Data shown in var_dump.
      * 
      * @return array
