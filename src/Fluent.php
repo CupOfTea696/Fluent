@@ -61,7 +61,7 @@ class Fluent extends IlluminateFluent implements FluentContract, IteratorAggrega
         $this->attributes = [];
         
         if ($attributes instanceof Arrayable) {
-            $attributes = $attributes->toArray());
+            $attributes = $attributes->toArray();
         }
         
         foreach ($attributes as $key => $value) {
