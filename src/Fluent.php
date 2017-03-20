@@ -1,12 +1,15 @@
 <?php
 namespace CupOfTea\Support;
 
+use ArrayIterator;
+use IteratorAggregate;
 use Illuminate\Support\Arr;
 use CupOfTea\Package\Package;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Fluent as IlluminateFluent;
 use CupOfTea\Support\Contracts\Fluent as FluentContract;
 
-class Fluent extends IlluminateFluent implements FluentContract
+class Fluent extends IlluminateFluent implements FluentContract, IteratorAggregate
 {
     use Package;
     
@@ -218,6 +221,16 @@ class Fluent extends IlluminateFluent implements FluentContract
     public function offsetUnset($offset)
     {
         unset($this->{$offset});
+    }
+    
+    /**
+     * Get the external iterator.
+     * 
+     * @return \Traversable
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->attributes);
     }
     
     /**
