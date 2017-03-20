@@ -60,6 +60,10 @@ class Fluent extends IlluminateFluent implements FluentContract, IteratorAggrega
     {
         $this->attributes = [];
         
+        if ($attributes instanceof Arrayable::class) {
+            $attributes = $attributes->toArray());
+        }
+        
         foreach ($attributes as $key => $value) {
             $this->attributes[$key] = $value;
         }
