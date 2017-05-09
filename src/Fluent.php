@@ -229,7 +229,7 @@ class Fluent extends IlluminateFluent implements FluentContract, IteratorAggrega
     
     /**
      * Get the external iterator.
-     * 
+     *
      * @return \Traversable
      */
     public function getIterator()
@@ -310,7 +310,7 @@ class Fluent extends IlluminateFluent implements FluentContract, IteratorAggrega
     
     /**
      * Return the properties that should be serialized.
-     * 
+     *
      * @return array
      */
     public function __sleep()
@@ -320,7 +320,7 @@ class Fluent extends IlluminateFluent implements FluentContract, IteratorAggrega
     
     /**
      * Data shown in var_dump.
-     * 
+     *
      * @return array
      */
     public function __debugInfo()
