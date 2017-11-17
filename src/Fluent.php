@@ -1,6 +1,7 @@
 <?php
 namespace CupOfTea\Support;
 
+use Countable;
 use ArrayIterator;
 use IteratorAggregate;
 use Illuminate\Support\Arr;
@@ -9,7 +10,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Fluent as IlluminateFluent;
 use CupOfTea\Support\Contracts\Fluent as FluentContract;
 
-class Fluent extends IlluminateFluent implements FluentContract, IteratorAggregate
+class Fluent extends IlluminateFluent implements FluentContract, Countable, IteratorAggregate
 {
     use Package;
     
@@ -149,6 +150,16 @@ class Fluent extends IlluminateFluent implements FluentContract, IteratorAggrega
     public function setAttributes($attributes = [])
     {
         return $this->fill($attributes);
+    }
+    
+    /**
+     * Count the attributes set in the Fluent instance.
+     * 
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->attributes);
     }
     
     /**
