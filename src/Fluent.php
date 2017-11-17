@@ -25,7 +25,7 @@ class Fluent extends IlluminateFluent implements FluentContract, IteratorAggrega
      *
      * @const string
      */
-    const VERSION = '1.2.3';
+    const VERSION = '1.2.4';
     
     /**
      * All of the attributes set on the container.
