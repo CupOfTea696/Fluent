@@ -50,7 +50,7 @@ class Fluent extends IlluminateFluent implements FluentContract, IteratorAggrega
      */
     public static function create($attributes = [])
     {
-        return new self($attributes);
+        return new static($attributes);
     }
     
     /**
