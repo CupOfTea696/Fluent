@@ -26,7 +26,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
      *
      * @const string
      */
-    const VERSION = '1.3.0';
+    const VERSION = '1.3.1';
     
     /**
      * All of the attributes set on the container.
