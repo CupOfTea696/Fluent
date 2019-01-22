@@ -154,7 +154,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     
     /**
      * Count the attributes set in the Fluent instance.
-     * 
+     *
      * @return int
      */
     public function count()
