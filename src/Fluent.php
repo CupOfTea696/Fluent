@@ -13,28 +13,28 @@ use CupOfTea\Support\Contracts\Fluent as FluentContract;
 class Fluent extends IlluminateFluent implements FluentContract, Countable, IteratorAggregate
 {
     use Package;
-    
+
     /**
      * Package Name.
      *
      * @const string
      */
     const PACKAGE = 'CupOfTea/Fluent';
-    
+
     /**
      * Package Version.
      *
      * @const string
      */
-    const VERSION = '1.3.2';
-    
+    const VERSION = '1.3.3';
+
     /**
      * All of the attributes set on the container.
      *
      * @var array
      */
     protected $attributes = [];
-    
+
     /**
      * Create a new Fluent Container instance.
      *
@@ -45,7 +45,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         $this->fill($attributes);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -53,25 +53,25 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return new static($attributes);
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function fill($attributes = [])
     {
         $this->attributes = [];
-        
+
         if ($attributes instanceof Arrayable) {
             $attributes = $attributes->toArray();
         }
-        
+
         foreach ($attributes as $key => $value) {
             $this->attributes[$key] = $value;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -80,10 +80,10 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
         if ($dotNotation) {
             return Arr::has($this->attributes, $key);
         }
-        
+
         return Arr::exists($this->attributes, $key);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -92,14 +92,14 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
         if ($dotNotation) {
             return Arr::get($this->attributes, $key, $default);
         }
-        
+
         if (array_key_exists($key, $this->attributes)) {
             return $this->attributes[$key];
         }
-        
+
         return value($default);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -110,10 +110,10 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
         } else {
             $this->attributes[$key] = $value;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -121,21 +121,21 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         if ($dotNotation) {
             Arr::forget($this->attributes, $keys);
-            
+
             return;
         }
-        
+
         $keys = (array) $keys;
-        
+
         if (count($keys) === 0) {
             return;
         }
-        
+
         foreach ($keys as $key) {
             unset($this->attributes[$key]);
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -143,7 +143,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return $this->attributes;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -151,7 +151,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return $this->fill($attributes);
     }
-    
+
     /**
      * Count the attributes set in the Fluent instance.
      *
@@ -161,7 +161,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return count($this->attributes);
     }
-    
+
     /**
      * Convert the Fluent instance to an array.
      *
@@ -171,7 +171,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return $this->attributes;
     }
-    
+
     /**
      * Convert the object into something JSON serializable.
      *
@@ -181,7 +181,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return $this->toArray();
     }
-    
+
     /**
      * Convert the Fluent instance to JSON.
      *
@@ -192,7 +192,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return json_encode($this->jsonSerialize(), $options);
     }
-    
+
     /**
      * Determine if the given offset exists.
      *
@@ -203,7 +203,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return isset($this->{$offset});
     }
-    
+
     /**
      * Get the value for a given offset.
      *
@@ -214,7 +214,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return $this->{$offset};
     }
-    
+
     /**
      * Set the value at the given offset.
      *
@@ -226,7 +226,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         $this->{$offset} = $value;
     }
-    
+
     /**
      * Unset the value at the given offset.
      *
@@ -237,7 +237,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         unset($this->{$offset});
     }
-    
+
     /**
      * Get the external iterator.
      *
@@ -247,7 +247,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return new ArrayIterator($this->attributes);
     }
-    
+
     /**
      * Handle dynamic calls of the container to get attribute.
      *
@@ -258,7 +258,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return $this->get($key, $default);
     }
-    
+
     /**
      * Handle dynamic calls to the container to set attributes.
      *
@@ -270,10 +270,10 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         $value = count($args) > 0 ? $args[0] : true;
         $dotNotation = count($args) > 1 ? $args[1] : true;
-        
+
         return $this->set($key, $value, $dotNotation);
     }
-    
+
     /**
      * Dynamically retrieve the value of an attribute.
      *
@@ -284,7 +284,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return $this->get($key);
     }
-    
+
     /**
      * Dynamically set the value of an attribute.
      *
@@ -296,7 +296,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         $this->set($key, $value);
     }
-    
+
     /**
      * Dynamically check if an attribute is set.
      *
@@ -307,7 +307,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return $this->has($key);
     }
-    
+
     /**
      * Dynamically unset an attribute.
      *
@@ -318,7 +318,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         $this->remove($key);
     }
-    
+
     /**
      * Return the properties that should be serialized.
      *
@@ -328,7 +328,7 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     {
         return ['attributes'];
     }
-    
+
     /**
      * Data shown in var_dump.
      *
