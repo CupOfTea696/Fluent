@@ -3,16 +3,16 @@
     "description": "Fluent Container",
     "authors": [
         {
-            "name": "Sven Wittevrongel",
-            "email": "cupoftea696@gmail.com"
+            "name": "Frankie Wittevrongel",
+            "email": "frankie@cupoftea.io"
         }
     ],
     "license": "MIT",
     "minimum-stability": "stable",
     "require": {
         "cupoftea/package": "^1.2",
-        "illuminate/contracts": ">=5.1 <5.8",
-        "illuminate/support": ">=5.1 <5.8"
+        "illuminate/contracts": ">=5.1 <5.9",
+        "illuminate/support": ">=5.1 <5.9"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0"
