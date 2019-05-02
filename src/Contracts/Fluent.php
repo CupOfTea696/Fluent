@@ -1,4 +1,5 @@
 <?php
+
 namespace CupOfTea\Support\Contracts;
 
 use ArrayAccess;
@@ -15,7 +16,7 @@ interface Fluent extends ArrayAccess, Arrayable, Jsonable, JsonSerializable
      * @return $this
      */
     public static function create($attributes = []);
-    
+
     /**
      * Fill the container with the given attributes.
      *
@@ -23,16 +24,16 @@ interface Fluent extends ArrayAccess, Arrayable, Jsonable, JsonSerializable
      * @return $this
      */
     public function fill($attributes = []);
-    
+
     /**
      * Check if an item or items exist in the array.
      *
-     * @param  string|array $key
+     * @param  string|array  $key
      * @param  bool  $dotNotation
      * @return bool
      */
     public function has($key, $dotNotation = true);
-    
+
     /**
      * Get an attribute from the container.
      *
@@ -41,7 +42,7 @@ interface Fluent extends ArrayAccess, Arrayable, Jsonable, JsonSerializable
      * @return mixed
      */
     public function get($key, $default = null);
-    
+
     /**
      * Set an attribute on the container.
      *
@@ -51,7 +52,7 @@ interface Fluent extends ArrayAccess, Arrayable, Jsonable, JsonSerializable
      * @return $this
      */
     public function set($key, $value = true, $dotNotation = true);
-    
+
     /**
      * Remove one or many items from the container.
      *
@@ -60,14 +61,14 @@ interface Fluent extends ArrayAccess, Arrayable, Jsonable, JsonSerializable
      * @return void
      */
     public function remove($keys, $dotNotation);
-    
+
     /**
      * Get the attributes from the container.
      *
      * @return array
      */
     public function getAttributes();
-    
+
     /**
      * Set the attributes on the container.
      *

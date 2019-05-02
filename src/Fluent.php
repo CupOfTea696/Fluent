@@ -139,14 +139,6 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     /**
      * {@inheritdoc}
      */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setAttributes($attributes = [])
     {
         return $this->fill($attributes);
@@ -160,37 +152,6 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     public function count()
     {
         return count($this->attributes);
-    }
-
-    /**
-     * Convert the Fluent instance to an array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * Convert the object into something JSON serializable.
-     *
-     * @return array
-     */
-    public function jsonSerialize()
-    {
-        return $this->toArray();
-    }
-
-    /**
-     * Convert the Fluent instance to JSON.
-     *
-     * @param  int  $options
-     * @return string
-     */
-    public function toJson($options = 0)
-    {
-        return json_encode($this->jsonSerialize(), $options);
     }
 
     /**
@@ -251,7 +212,8 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     /**
      * Handle dynamic calls of the container to get attribute.
      *
-     * @param  string  $attribute
+     * @param  string  $key
+     * @param  null  $default
      * @return mixed
      */
     public function __invoke($key, $default = null)
@@ -262,8 +224,8 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     /**
      * Handle dynamic calls to the container to set attributes.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param  string  $key
+     * @param  array  $args
      * @return $this
      */
     public function __call($key, $args)
@@ -272,17 +234,6 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
         $dotNotation = count($args) > 1 ? $args[1] : true;
 
         return $this->set($key, $value, $dotNotation);
-    }
-
-    /**
-     * Dynamically retrieve the value of an attribute.
-     *
-     * @param  string  $key
-     * @return mixed
-     */
-    public function __get($key)
-    {
-        return $this->get($key);
     }
 
     /**
