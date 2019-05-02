@@ -63,6 +63,22 @@ interface Fluent extends ArrayAccess, Arrayable, Jsonable, JsonSerializable
     public function remove($keys, $dotNotation);
 
     /**
+     * Get all of the attributes except for a specified array of attributes.
+     *
+     * @param  array|string  $keys
+     * @return array
+     */
+    public function except($keys);
+
+    /**
+     * Get a subset of the Fluent's attributes.
+     *
+     * @param  array|string  $keys
+     * @return array
+     */
+    public function only($keys);
+
+    /**
      * Get the attributes from the container.
      *
      * @return array

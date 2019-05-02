@@ -137,6 +137,28 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
     }
 
     /**
+     * Get a subset of the Fluent's attributes.
+     *
+     * @param  array|string  $keys
+     * @return array
+     */
+    public function only($keys)
+    {
+        return Arr::only($this->attributes, $keys);
+    }
+
+    /**
+     * Get all of the attributes except for a specified array of attributes.
+     *
+     * @param  array|string  $keys
+     * @return array
+     */
+    public function except($keys)
+    {
+        return Arr::except($this->attributes, $keys);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function setAttributes($attributes = [])
