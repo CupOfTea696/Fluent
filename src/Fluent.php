@@ -19,7 +19,14 @@ class Fluent extends IlluminateFluent implements FluentContract, Countable, Iter
      *
      * @const string
      */
-    const PACKAGE = 'CupOfTea/Fluent';
+    const VENDOR = 'CupOfTea';
+
+    /**
+     * Package Name.
+     *
+     * @const string
+     */
+    const PACKAGE = 'Fluent';
 
     /**
      * Package Version.

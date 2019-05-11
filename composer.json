@@ -10,7 +10,7 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "require": {
-        "cupoftea/package": "^1.2",
+        "cupoftea/package": "^1.4",
         "illuminate/contracts": ">=5.1 <5.9",
         "illuminate/support": ">=5.1 <5.9"
     },
