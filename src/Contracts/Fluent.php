@@ -13,7 +13,7 @@ interface Fluent extends ArrayAccess, Arrayable, Jsonable, JsonSerializable
      * Create a new Fluent Container instance.
      *
      * @param  array|object  $attributes
-     * @return $this
+     * @return static
      */
     public static function create($attributes = []);
 
